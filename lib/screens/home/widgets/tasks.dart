@@ -7,19 +7,15 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:task_management_app/screens/detail/detail.dart';
 
 class Tasks extends StatefulWidget {
-  final List<Task> taskList;
+  List taskList = Task.generateTasks();
 
-  Tasks({Key? key, required this.taskList}) : super(key: key);
   @override
   State<Tasks> createState() => _TasksState();
 }
 
 class _TasksState extends State<Tasks> {
-  // var newTaskList = widget.taskList;
   @override
   Widget build(BuildContext context) {
-    var newList = [...widget.taskList];
-    // var taskList = Task.generateTasks();
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 15),
       child: GridView.builder(
@@ -29,8 +25,8 @@ class _TasksState extends State<Tasks> {
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
           ),
-          itemBuilder: (context, index) => newList[index].isLast
-              ? _buildAddTask(newList)
+          itemBuilder: (context, index) => widget.taskList[index].isLast
+              ? _buildAddTask(widget.taskList)
               : _buildTask(context, widget.taskList[index])),
     );
   }
@@ -44,8 +40,10 @@ class _TasksState extends State<Tasks> {
         strokeWidth: 2,
         child: GestureDetector(
           onTap: () {
+            widget.taskList.removeLast();
             setState(() {
-              newList = [...widget.taskList, argTask];
+              widget.taskList.add(argTask);
+              widget.taskList.add(Task(isLast: true));
             });
           },
           child: Center(
