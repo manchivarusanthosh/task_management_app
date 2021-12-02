@@ -58,7 +58,6 @@ class Task {
 
   static List<Task> addNewTask(newTask) {
     var taskList = generateTasks();
-
     print(taskList);
     return [...taskList, newTask];
   }

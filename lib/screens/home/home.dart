@@ -6,14 +6,7 @@ import 'package:task_management_app/screens/home/widgets/go_premium.dart';
 import 'package:task_management_app/screens/home/widgets/tasks.dart';
 
 // ignore: use_key_in_widget_constructors
-class Home extends StatefulWidget {
-  @override
-  State<Home> createState() => _HomeState();
-}
-
-class _HomeState extends State<Home> {
-  final taskList = Task.generateTasks();
-
+class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +25,7 @@ class _HomeState extends State<Home> {
                     fontSize: 22,
                     fontWeight: FontWeight.bold)),
           ),
-          Expanded(child: Tasks(taskList: taskList)),
+          Expanded(child: Tasks()),
         ],
       ),
       bottomNavigationBar: _bottomNavigationBar(),
